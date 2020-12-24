@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../store/actions';
 
-export default function Login(props) {
+function Login(props) {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(null);
@@ -31,12 +33,13 @@ export default function Login(props) {
           password,
         })
         .then((res) => {
-          props.history.push('/balance');
+          props.login(res.data);
+          props.history.push('/home');
         })
         .catch((serverError) => {
+          console.log(serverError);
           setError('Invalid username or Password');
         });
-    console.log(error);
   }
 
   const showError = () =>
@@ -78,3 +81,13 @@ export default function Login(props) {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (data) => {
+      dispatch(ActionCreators.login(data));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
