@@ -1,12 +1,16 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Balance } from './components/Balance';
 import Login from './components/Login';
+import { Transaction } from './components/Transaction';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/balance" component={Balance} />
+          <Route exact path="/transaction" component={Transaction} />
         </Switch>
       </Router>
     </div>
