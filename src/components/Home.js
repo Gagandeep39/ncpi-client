@@ -6,13 +6,9 @@ const Home = () => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    axios
-      .get(
-        'https://s3-ap-southeast-1.amazonaws.com/he-public-data/users49b8675.json'
-      )
-      .then((res) => {
-        console.log(res);
-      });
+    axios.get('/api/details').then((res) => {
+      console.log(res);
+    });
   }, []);
   return <div></div>;
 };

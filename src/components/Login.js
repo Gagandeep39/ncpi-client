@@ -28,7 +28,7 @@ function Login(props) {
     event.preventDefault();
     if (validateForm())
       axios
-        .post(`${process.env.REACT_APP_URL}/login`, {
+        .post(`/login`, {
           userId: userId,
           password,
         })
