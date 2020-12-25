@@ -39,7 +39,9 @@ const Home = (props) => {
 
   const updateTransaction = (data) => {
     axios.get('/api/transactions').then((res) => {
-      setTransactions({ data: res.data });
+      setTransactions({
+        data: res.data.filter((item) => item.sender === props.userId),
+      });
     });
     axios.get('/api/balances').then((res) => {
       setBalance(res.data.balance);
