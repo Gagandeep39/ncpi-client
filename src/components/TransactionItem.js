@@ -2,7 +2,7 @@ import React from 'react';
 
 export const TransactionItem = ({ transaction }) => {
   return (
-    <ul>
+    <ul key={transaction.id}>
       <h4>
         <b> ID: {transaction.id} </b>
       </h4>

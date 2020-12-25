@@ -1,9 +1,8 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 
-export const UserItem = ({ user }) => {
+export const UserItem = ({ user, selectItem }) => {
   return (
-    <ul style={{ cursor: 'pointer' }}>
+    <ul style={{ cursor: 'pointer' }} onClick={() => selectItem(user)}>
       <img
         src={user.image}
         alt="Avatar"
