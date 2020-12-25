@@ -3,16 +3,16 @@ import { Card } from 'react-bootstrap';
 
 export const UserItem = ({ user }) => {
   return (
-    <ul style={{ width: '30%', cursor: 'pointer' }}>
+    <ul style={{ cursor: 'pointer' }}>
       <img
         src={user.image}
         alt="Avatar"
         style={{ width: '50px', float: 'right' }}
       />
       <h4>
-        <b>John Doe</b>
+        <b> {user.id} </b>
       </h4>
-      <p>Architect & Engineer</p>
+      <p> {user.name} </p>
       <hr></hr>
     </ul>
   );

@@ -3,7 +3,7 @@ import { UserItem } from './UserItem';
 
 export const UserList = ({ users }) => {
   return (
-    <div className="row-4">
+    <div style={{ width: '30%' }}>
       <h2 style={{ marginLeft: '25px' }}>Contacts</h2>
       {users && users.map((user) => <UserItem key={user.id} user={user} />)}
     </div>
