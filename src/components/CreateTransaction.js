@@ -27,10 +27,11 @@ export const CreateTransaction = ({
     axios
       .post('/api/transactions', data)
       .then((res) => {
+        console.log(res);
         transactionCreated(res);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         setError('Not Enough Balance');
       });
   };

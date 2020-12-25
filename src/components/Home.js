@@ -5,6 +5,7 @@ import { UserList } from './UserList';
 import { Balance } from './Balance';
 import { TransactionList } from './TransactionList';
 import { CreateTransaction } from './CreateTransaction';
+import { ActionCreators } from '../store/actions';
 
 const Home = (props) => {
   const [userData, setUserData] = useState(null);
@@ -15,12 +16,11 @@ const Home = (props) => {
   });
 
   useEffect(() => {
+    if (!props.userId) props.history.push('/');
     axios.get('/api/details').then((res) => {
       setUserData({ ...userData, data: res.data });
     });
-    axios.get('/api/balances').then((res) => {
-      setBalance(res.data.balance);
-    });
+
     updateTransaction();
   }, []);
 
@@ -32,9 +32,17 @@ const Home = (props) => {
     });
   };
 
+  const logout = () => {
+    props.logout();
+    props.history.push('/');
+  };
+
   const updateTransaction = (data) => {
     axios.get('/api/transactions').then((res) => {
-      setTransactions({ ...transactions, data: res.data });
+      setTransactions({ data: res.data });
+    });
+    axios.get('/api/balances').then((res) => {
+      setBalance(res.data.balance);
     });
   };
 
@@ -42,6 +50,13 @@ const Home = (props) => {
   else
     return (
       <div>
+        <button
+          className="btn btn-danger"
+          onClick={logout}
+          style={{ top: '16px', right: '18px', position: 'absolute' }}
+        >
+          Logout
+        </button>
         <Balance balance={balance} />
         <div className="row">
           <UserList
@@ -53,12 +68,9 @@ const Home = (props) => {
             contact={selectedContact.contact}
             userId={selectedContact.user}
             contactName={selectedContact.name}
-          />
-          <TransactionList
-            class="col-4"
-            transactionData={transactions?.data}
             transactionCreated={updateTransaction}
           />
+          <TransactionList class="col-4" transactionData={transactions?.data} />
         </div>
       </div>
     );
@@ -70,4 +82,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatcherToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(ActionCreators.logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatcherToProps)(Home);
