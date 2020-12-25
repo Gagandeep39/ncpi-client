@@ -74,6 +74,9 @@ function Login(props) {
           </Form.Control.Feedback>
         </Form.Group>
         {showError()}
+        <Alert variant="dark">
+          Username: Anything between 1001 - 1008, Password: 123456
+        </Alert>
         <Button block size="lg" type="submit">
           Login
         </Button>
